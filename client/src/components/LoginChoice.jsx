@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import "../css/LoginChoice.css";
 
 const LoginChoice = ({ selectedOption, onOptionChange }) => {

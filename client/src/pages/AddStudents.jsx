@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+
 import { useState, useEffect } from "react";
 import customFetch from "../utils/customFetch";
 import { useNavigate } from "react-router-dom";
@@ -6,8 +8,6 @@ import "../style/AddStudent.scss";
 import { OrganizeCustomFields } from "../components";
 import iconUser from "../images/iconUser.svg";
 import avatar from "../images/avatar.svg";
-import location from "../images/location.svg";
-
 const AddStudent = () => {
   const navigate = useNavigate();
   const [customFieldsData, setCustomFieldsData] = useState([]);

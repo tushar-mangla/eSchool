@@ -1,10 +1,11 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import "../style/AllStudent.scss";
 import actionIcon from "../images/actionIcon.svg";
 import { RiDeleteBin5Line } from "react-icons/Ri";
 const StudentContainer = ({
   students,
+  customFieldLabels,
   currentPage,
   numOfPages,
   handlePageChange,
@@ -14,6 +15,29 @@ const StudentContainer = ({
     <div className="studentList">
       <table className="tableContainer">
         <thead>
+          {/* <tr className="tableHeader">
+            <th>Student ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Class</th>
+            <th>Parents Name</th>
+            <th>Address</th>
+            
+            <th className="customFieldsHeader">
+              <div className="customFieldsHeaderContainer">
+                {customFieldLabels.map((labelObj) => (
+                  <div key={labelObj._id} className="customFieldLabel">
+                    <th>
+                    {labelObj.label}
+                    </th>
+                  </div>
+                ))}
+              </div>
+            </th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr> */}
           <tr className="tableHeader">
             <th>Student ID</th>
             <th>First Name</th>
@@ -22,7 +46,11 @@ const StudentContainer = ({
             <th>Class</th>
             <th>Parents Name</th>
             <th>Address</th>
-            <th>Custom Fields</th>
+            {customFieldLabels.map((labelObj) => (
+              <th key={labelObj._id} className="customFieldHeader">
+                {labelObj.label}
+              </th>
+            ))}
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -39,12 +67,18 @@ const StudentContainer = ({
               <td className="listItems">{student.studentClass}</td>
               <td className="listItems">{student.parentsName}</td>
               <td className="listItems">{student.address}</td>
-              <td className="listItems">
-                {/* Loop through custom fields and render their values */}
-                {Object.entries(student.customFields).map(([key, value]) => (
-                  <div key={key}> {value}</div>
-                ))}
-              </td>
+              {customFieldLabels.map(
+                (labelObj) =>
+                  (student.customFields[labelObj._id] && (
+                    <td key={labelObj._id} className="customField listItems">
+                      {student.customFields[labelObj._id]}
+                    </td>
+                  )) || (
+                    <td key={labelObj._id} className="customField listItems">
+                      -{" "}
+                    </td>
+                  )
+              )}
               <td className="listItems">
                 <Link
                   to={`/dashboard/students/${student._id}`}

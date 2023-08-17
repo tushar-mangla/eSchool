@@ -1,13 +1,39 @@
 import { useDashboardContext } from "../pages/Dashboard";
-import { FaUser } from "react-icons/fa";
+import { Avatar, Typography, Box, Container } from "@mui/material";
 
 const Profile = () => {
   const { user } = useDashboardContext();
 
   return (
     <div>
-      <h2>Profile</h2>
-      <div>
+      <Container maxWidth="sm">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            mt: 4,
+          }}
+        >
+          <Avatar
+            src={user?.user?.avatar}
+            alt={user?.user?.name}
+            sx={{
+              width: 100,
+              height: 100,
+              mb: 2,
+            }}
+          />
+          <Typography variant="h4" gutterBottom>
+            {user?.user?.name}
+          </Typography>
+          <Typography variant="body1" color="textSecondary" gutterBottom>
+            {user?.user?.email}
+          </Typography>
+        </Box>
+      </Container>
+
+      {/* <div>
         {user?.user?.avatar ? (
           <img
             src={user.user.avatar}
@@ -19,7 +45,7 @@ const Profile = () => {
         )}
         <p>First Name: {user?.user?.name}</p>
         <h5>Email : {user?.user?.email}</h5>
-      </div>
+      </div> */}
     </div>
   );
 };

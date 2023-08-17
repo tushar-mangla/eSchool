@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 import plus from "../images/plus.svg";
-import edit from "../images/edit.svg";
 import actionIcon from "../images/actionIcon.svg";
 import "../style/Settings.scss";
 import { RiDeleteBin5Line } from "react-icons/Ri";
@@ -11,6 +10,7 @@ import AddCustomField from "./AddCustom";
 
 const GetAllCustoms = () => {
   const [customFields, setCustomFields] = useState([]);
+  const [showEditProfile, setShowEditProfile] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
   useEffect(() => {
@@ -70,11 +70,19 @@ const GetAllCustoms = () => {
                     </td>
                     <td className="listItems">
                       <Link
-                        to={`/dashboard/settings/${field._id}`}
+                        onClick={() => setShowEditProfile(true)}
+                        // to={`/dashboard/settings/${field._id}`}
                         state={{ fieldDetails: field }}
                       >
                         <img src={actionIcon} />
                       </Link>
+                      {showEditProfile && (
+                        <EditCustomField
+                          customId={field._id}
+                          setShowProfile={setShowEditProfile}
+                          fieldDetails={field}
+                        />
+                      )}
                     </td>
                     <td className="listItems">
                       <RiDeleteBin5Line
@@ -86,6 +94,7 @@ const GetAllCustoms = () => {
               </tbody>
             </table>
           </div>
+
           {showProfile && <AddCustomField setShowProfile={setShowProfile} />}
         </div>
       </div>

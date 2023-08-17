@@ -2,7 +2,6 @@ import { StatusCodes } from "http-status-codes";
 import CustomField from "../models/CustomrFieldModel.js";
 
 export const createCustomField = async (req, res) => {
-  // console.log(req.user);
   try {
     const { groupname, section, label, type } = req.body;
 

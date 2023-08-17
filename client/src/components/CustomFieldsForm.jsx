@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import "../style/AddStudent.scss";
+import { Fragment } from "react";
 const CustomFieldsForm = ({
   customFieldsData,
   customFields,
@@ -9,44 +11,60 @@ const CustomFieldsForm = ({
   };
 
   return (
-    <div>
-      {customFieldsData.map((group) => (
-        <div key={group.groupname}>
-          <h3>{group.groupname}</h3>
-          {group.sections.map((section) => (
-            <div key={section.section}>
-              <h4>{section.section}</h4>
-              {section.fields.map((field) => (
-                <div key={field._id}>
-                  <label>{field.label}:</label>
-                  {field.type === "input" && (
-                    <input
-                      type="text"
-                      value={customFields[field._id] || ""}
-                      onChange={(e) =>
-                        handleInputChange(field._id, e.target.value, field.type)
-                      }
-                    />
-                  )}
-                  {field.type === "checkbox" && (
-                    <input
-                      type="checkbox"
-                      checked={customFields[field._id] || false}
-                      onChange={(e) =>
-                        handleInputChange(
-                          field._id,
-                          e.target.checked,
-                          field.type
-                        )
-                      }
-                    />
-                  )}
-                </div>
-              ))}
+    <div className="customContainer">
+      <Fragment>
+        {customFieldsData.map((group) => (
+          <div key={group.groupname}>
+            <span className="groupText">{group.groupname}</span>
+            <div className="customGroup">
+              <Fragment>
+                {group.sections.map((section) => (
+                  <div key={section.section}>
+                    <span className="sectionText">{section.section}</span>
+                    <div className="customSection">
+                      <div className="customLabel">
+                        {section.fields.map((field) => (
+                          <div key={field._id}>
+                            <span className="labelText">{field.label}:</span>
+                            {field.type === "input" && (
+                              <input
+                                className="labelInput"
+                                // type="text"
+                                value={customFields[field._id] || ""}
+                                onChange={(e) =>
+                                  handleInputChange(
+                                    field._id,
+                                    e.target.value,
+                                    field.type
+                                  )
+                                }
+                              />
+                            )}
+                            {field.type === "checkbox" && (
+                              <input
+                                className="inputLabel"
+                                type="checkbox"
+                                checked={customFields[field._id] || false}
+                                onChange={(e) =>
+                                  handleInputChange(
+                                    field._id,
+                                    e.target.checked,
+                                    field.type
+                                  )
+                                }
+                              />
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </Fragment>
             </div>
-          ))}
-        </div>
-      ))}
+          </div>
+        ))}
+      </Fragment>
     </div>
   );
 };

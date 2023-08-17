@@ -10,12 +10,12 @@ import PasswordValidator from "password-validator";
 import { validateDate } from "../utils/validateDate.js";
 import User from "../models/UserModel.js";
 import Student from "../models/StudentModel.js";
-import {
-  STUDENT_CLASS,
-  STUDENT_GENDER,
-  STUDENT_LOCATION,
-  STUDENT_SECTION,
-} from "../utils/constants.js";
+// import {
+//   STUDENT_CLASS,
+//   STUDENT_GENDER,
+//   STUDENT_LOCATION,
+//   STUDENT_SECTION,
+// } from "../utils/constants.js";
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -50,19 +50,6 @@ export const validateStudentInput = withValidationErrors([
     .withMessage("Invalid gender value"),
   body("parentsName").notEmpty().withMessage("Parents' name is required"),
   body("address").notEmpty().withMessage("Address is required"),
-  // validateDate("joiningInfo.interviewDate"),
-  // body("joiningInfo.guardianName")
-  //   .optional()
-  //   .notEmpty()
-  //   .withMessage("Guardian name is required"),
-  // body("joiningInfo.relationWithGuardian")
-  //   .optional()
-  //   .notEmpty()
-  //   .withMessage("Relation with guardian is required"),
-  // body("joiningInfo.interviewer")
-  //   .optional()
-  //   .notEmpty()
-  //   .withMessage("Interviewer is required"),
 ]);
 
 export const validateIdParam = withValidationErrors([

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BarChartComponent } from "../components";
 import { toast } from "react-toastify";
 import { useDashboardContext } from "../pages/Dashboard";
@@ -13,7 +13,6 @@ const Stats = () => {
       try {
         if (user) {
           const response = await customFetch.get("/users/stats");
-          // console.log(response);
           setData(response.data);
         }
       } catch (error) {

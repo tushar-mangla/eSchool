@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../style/Sidebar.scss";
 import settingSidebar from "../images/settingSidebar.svg";
 import dashboardSidebar from "../images/dashboardSidebar.svg";
 import studentSidebar from "../images/studentSidebar.svg";
-import emailLogo from "../images/emailLogo.svg";
 
 const Sidebar = () => {
   const [sidebarState, setSidebarState] = useState({

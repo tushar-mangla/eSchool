@@ -1,11 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormRow } from "../components";
-import Logo from "../components/Logo";
 import { Link } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 import groupPhoto from "../images/groupPhoto.png";
-import emailLogo from "../images/emailLogo.svg";
 import mainLogo from "../images/mainLogo.svg";
 import { toast } from "react-toastify";
 import "../style/RegisterPage.scss";

@@ -1,11 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 import leftArrow from "../images/leftArrow.svg";
 import "../style/Settings.scss";
 
-const EditCustomField = ({ EditCustomField }) => {
-  const { customId } = useParams();
+const EditCustomField = ({ setShowProfile, customId, fieldDetails }) => {
   const navigate = useNavigate();
 
   const [customField, setCustomField] = useState({
@@ -14,19 +14,9 @@ const EditCustomField = ({ EditCustomField }) => {
     label: "",
     type: "",
   });
-
   useEffect(() => {
-    const fetchCustomField = async () => {
-      try {
-        const response = await customFetch.get(`/custom/${customId}`);
-        setCustomField(response.data);
-      } catch (error) {
-        console.error("Error fetching custom field:", error);
-      }
-    };
-
-    fetchCustomField();
-  }, [customId]);
+    setCustomField(fieldDetails);
+  }, [fieldDetails]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,6 +34,8 @@ const EditCustomField = ({ EditCustomField }) => {
     } catch (error) {
       console.error("Error updating custom field:", error);
     }
+    setShowProfile(false);
+    window.location.reload();
   };
 
   return (
@@ -63,37 +55,32 @@ const EditCustomField = ({ EditCustomField }) => {
         <p className="headerItems">Type</p>
       </div>
       <form className="inputField" onSubmit={handleSubmit}>
-        {/* <label htmlFor="groupname">Group Name:</label> */}
         <input
+          className="inputItems"
           type="text"
-          id="groupname"
           name="groupname"
           value={customField.groupname}
           onChange={handleChange}
+          required
         />
-
-        {/* <label htmlFor="section">Section:</label> */}
         <input
           className="inputItems"
           type="text"
-          id="section"
           name="section"
           value={customField.section}
           onChange={handleChange}
+          required
         />
-
-        {/* <label htmlFor="label">Label:</label> */}
         <input
           className="inputItems"
           type="text"
-          id="label"
           name="label"
           value={customField.label}
           onChange={handleChange}
+          required
         />
-
-        {/* <label htmlFor="type">Type:</label> */}
         <select
+          className="inputItems"
           name="type"
           value={customField.type}
           onChange={handleChange}
@@ -104,7 +91,6 @@ const EditCustomField = ({ EditCustomField }) => {
           <option value="input">Input</option>
           <option value="checkbox">Checkbox</option>
         </select>
-
         <button className="saveBtn" type="submit">
           Save
         </button>

@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDashboardContext } from "../pages/Dashboard";
 import "../style/Navbar.scss";
@@ -17,8 +18,14 @@ const Navbar = () => {
     await logoutUser();
     navigate("/login");
   };
+
   const [showProfile, setShowProfile] = useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
   const path = "";
+
+  const handleProfileClick = () => {
+    setShowProfile(!showProfile);
+  };
 
   return (
     <nav className="navbar">
@@ -36,7 +43,8 @@ const Navbar = () => {
         )}
         <div
           className="usernamAdmin"
-          onClick={() => setShowProfile(!showProfile)}
+          // onClick={() => setShowProfile(!showProfile)}
+          onClick={handleProfileClick}
         >
           <div className="username">
             <div className="name">{user?.user?.name}</div>
